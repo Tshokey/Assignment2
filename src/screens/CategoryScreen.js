@@ -23,7 +23,7 @@ const extractCategories = () => {
   });
 
   return Object.values(categories);
-}
+};
 
 
 export default function CategoryScreen({navigation}){
