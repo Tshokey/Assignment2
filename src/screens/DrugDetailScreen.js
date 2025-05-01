@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   subtext: { 
     marginTop: 15,
     textAlign: 'center', 
-    fontSize: 13, 
+    fontSize: 13
   },
   categories: { 
     marginTop: 10, 
