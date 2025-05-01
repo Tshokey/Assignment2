@@ -3,7 +3,7 @@ import {Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function DrugItem({ name, onPress }){
   return(
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style {styles.button} onPress={onPress}>
       <Text style={styles.text}>{name}</Text>
     </TouchableOpacity>
   );
