@@ -38,7 +38,7 @@ export default function PronunciationPlayer({ label, sound, gender, isOpen, onOp
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={playSound} style={styles.iconButton}>
-        <Ionicons name="volume-high" size={20} color="black" />
+        <Ionicons name="volume-high" size={10} color="black" />
       </TouchableOpacity>
 
       <Text style={styles.label}>{label}</Text>
