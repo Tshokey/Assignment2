@@ -1,5 +1,5 @@
 const audioFiles ={
-    'Celecoxib - female.wav': require('../assets/audio/Celecoxib - female.wav'),
+    'Celecoxib - female.wav' require('../assets/audio/Celecoxib - female.wav'),
     'Celecoxib 1 - male.wav': require('../assets/audio/Celecoxib 1 - male.wav'),
     'Chloramphenicol - female.wav': require('../assets/audio/Chloramphenicol - female.wav'),
     'Chloramphenicol 1 - male.wav': require('../assets/audio/Chloramphenicol 1 - male.wav'),
