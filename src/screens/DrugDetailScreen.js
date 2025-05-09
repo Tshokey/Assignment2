@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4287f5', 
     padding: 15, 
     marginTop: 20, 
-    borderRadius: 8,
+    borderRadius: 7,
   },
   studyText: { 
     color: 'white', 
