@@ -2,10 +2,17 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import PronunciationPlayer from '../components/PronunciationPlayer';
 import { drugCategory } from '../../resources/resource';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToLearning } from '../redux/learningSlice';
 
 export default function DrugDetailScreen({ route }) {
   const { drug } = route.params;
   const [openIndex, setOpenIndex] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const learningList = useSelector(state => state.learning.current);
+  const isLearning = learningList.some(d => d.id === drug.id);
 
   return (
     <View style={styles.container}>
@@ -30,10 +37,15 @@ export default function DrugDetailScreen({ route }) {
          />
        )}
      />
-
-      <TouchableOpacity style={styles.studyButton}>
+      {!isLearning && (
+        <TouchableOpacity 
+            style={styles.studyButton}
+            onPress={() => dispatch(addToLearning(drug))}
+        >
         <Text style={styles.studyText}>STUDY</Text>
       </TouchableOpacity>
+      )}
+
     </View>
   );
 }
