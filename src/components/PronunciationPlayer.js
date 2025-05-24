@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Audio } from 'expo-av';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,6 +14,8 @@ export default function PronunciationPlayer({ label, sound, gender, isOpen, onOp
     { label: '0.25', value: 0.25 },
   ]);
 
+  const [setSound] = useState();
+
   const playSound = async () => {
     try {
       const fileKey = `${label} ${gender === 'male' ? '1 - male' : '- female'}.wav`;
@@ -24,22 +26,32 @@ export default function PronunciationPlayer({ label, sound, gender, isOpen, onOp
         return;
       }
 
-      const { sound: playbackObject } = await Audio.Sound.createAsync(audioModule);
-      await playbackObject.setRateAsync(speed, true);
-      await playbackObject.playAsync();
+      const { sound } = await Audio.Sound.createAsync(
+        require("./assets/audio.wav"),
+        {shouldPlay: true}
+      );
+
+      await sound.setRateAsync(speed, true);
+      await sound.playAsync();
     } catch (error) {
       console.error('Error playing sound:', error);
     }
   };
 
+  useEffect(() => {
+    return sound ? () => {
+      console.log("Unloading Sound");
+      sound.unloadAsync();
+    }
+    : undefined;
+  }, [sound]);
+  
   const genderIcon = gender === 'male' ? 'male' : 'female';
   const genderColor = gender === 'male' ? '#007AFF' : '#FF2D55';
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={playSound} style={styles.iconButton}>
-        <Ionicons name="volume-high" size={10} color="black" />
-      </TouchableOpacity>
+      <Ionicons name="volume-high" size={20} color="black" onPress={playSound} style={styles.iconButton}/>
 
       <Text style={styles.label}>{label}</Text>
 

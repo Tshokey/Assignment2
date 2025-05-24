@@ -7,7 +7,7 @@ export const drugData = [
     categories: ["c_0001"],
     molecular_formula: "C13H18O2",
     sounds: [
-      { gender: "female", file "Ibuprofen - female.wav" },
+      { gender: "female", file: "Ibuprofen - female.wav" },
       { gender: "male", file: "Ibuprofen 1 - male.wav" },
     ],
   },

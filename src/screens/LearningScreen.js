@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     container: { 
       flex: 1, 
       padding: 10,
-      marginBottom: 40,
     },
     title: { 
       fontSize: 24, 
@@ -90,7 +89,6 @@ const styles = StyleSheet.create({
     },
     recordContainer: {
         alignItems: 'center',
-        marginVertical: 10,
         backgroundColor: 'white',
     },
     recordButton:{

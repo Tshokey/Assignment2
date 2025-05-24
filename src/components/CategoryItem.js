@@ -11,7 +11,7 @@ export default function CategoryItem({ name, count, onPress }) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
     padding: 15,
     marginVertical: 5,
     borderRadius: 8,

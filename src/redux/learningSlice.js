@@ -15,7 +15,7 @@ export const learningSlice = createSlice({
         },
         finishDrug: (state, action) => {
             const drugId = action.payload;
-            const drug = state.current.find(d => d.id === drug.id);
+            const drug = state.current.find(d => d.id === drugId);
             if (drug) {
                 state.current = state.current.filter(d => d.id !== drugId);
                 state.finished.push(drug);
