@@ -10,6 +10,9 @@ export default function LearningScreen({route, navigation}) {
     const [openIndex, setOpenIndex] = useState(null);
     const dispatch = useDispatch();
 
+    const [recordings, setRecordings] = useState([]);
+    const [recording, setRecording] = useState(null);
+
     const handleFinish =() => {
         dispatch(finishDrug(drug.id));
         navigation.goBack();
@@ -18,6 +21,27 @@ export default function LearningScreen({route, navigation}) {
     const handleRemove=()=> {
         dispatch(removeDrug(drug.id));
         navigation.goBack();
+    };
+    
+    const startRecording = async () => {
+        const { status } = await Audio.requestPermissionsAsync();
+        if (status !== 'granted') return;
+    
+        await Audio.setAudioModeAsync({ allowsRecordingIOS: true });
+        const { recording } = await Audio.Recording.createAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
+        setRecording(recording);
+    };
+
+    const stopRecording = async () => {
+        await recording.stopAndUnloadAsync();
+        const uri = recording.getURI();
+        setRecordings([...recordings, { uri, date: new Date(), score: null }]);
+    };
+
+    const evaluateRecording = (index) => {
+        const newRecordings = [...recordings];
+        newRecordings[index].score = Math.floor(Math.random() * 101); // Random score
+        setRecordings(newRecordings);
     };
 
     return(
