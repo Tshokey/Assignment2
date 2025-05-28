@@ -108,6 +108,7 @@ function BottomTabs() {
 	const currentCount = useSelector((state) => state.learning.current.length);
 
 	return (
+		
 		<Tabs.Navigator
 			screenOptions={{
 				headerShown: false,
