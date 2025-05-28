@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  current: [],      // Drugs in progress
-  finished: [],     // Drugs mastered
-  scores: {},       // Track highest scores per drug: { drugId: score }
-  recordings: {},   // Store recordings: { drugId: [{ uri, date, score }] }
+  current: [],      
+  finished: [],     
+  scores: {},       
+  recordings: {},
+  totalScore: 0,   
 };
 
 export const learningSlice = createSlice({
@@ -50,10 +51,15 @@ export const learningSlice = createSlice({
         date: new Date().toISOString(),
         score,
       });
+    },
 
-      // Update highest score for this drug
+    updateTotalScore: (state, action) => {
+      const { drugId, score } = action.payload;
+
       if (!state.scores[drugId] || score > state.scores[drugId]) {
+        const prevScore = state.scores[drugId] || 0;
         state.scores[drugId] = score;
+        state.totalScore = state.totalScore - prevScore + score;
       }
     },
 
@@ -65,15 +71,13 @@ export const learningSlice = createSlice({
   },
 });
 
+
 // Selectors (for easy access in components)
 export const selectCurrentCount = (state) => state.learning.current.length;
 export const selectFinishedCount = (state) => state.learning.finished.length;
-export const selectTotalScore = (state) => 
-  Object.values(state.learning.scores).reduce((sum, score) => sum + score, 0);
-export const selectDrugRecordings = (drugId) => (state) => 
-  state.learning.recordings[drugId] || [];
+export const selectTotalScore = (state) => state.learning.totalScore;
 
 // Action creators
-export const { addToLearning,finishDrug,removeDrug,addRecording,deleteRecording} = learningSlice.actions;
+export const { addToLearning,finishDrug,removeDrug,addRecording,updateTotalScore,deleteRecording} = learningSlice.actions;
 export default learningSlice.reducer;
 
